@@ -122,7 +122,7 @@ peticionGet();
     <div className="App">
 
     <br/><br/><br/>
-    <h2><center>Consulta de fiscalías del MP</center></h2>
+    <h2><center>Consulta de fiscalías de MP</center></h2>
     <br/>
     <button onClick={()=>abrirCerrarModalInsertar()} className="btn btn-success">Igresar nueva fiscalía</button>
     <br/>
