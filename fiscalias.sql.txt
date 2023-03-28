@@ -1,0 +1,22 @@
+USE [prueba]
+GO
+
+/****** Object:  Table [dbo].[gestores_db]    Script Date: 28/03/2023 14:27:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[gestores_db](
+	[id] [int] NOT NULL,
+	[nombre] [varchar](50) NOT NULL,
+	[fiscalia] [int] NOT NULL,
+	[descripcion] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_gestores_db] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
