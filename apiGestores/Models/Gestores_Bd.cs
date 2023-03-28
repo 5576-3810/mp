@@ -11,7 +11,7 @@ namespace apiGestores.Models
         [Key]
         public int id { get; set; }
         public string nombre { get; set; }
-        public int lanzamiento { get; set; }
-        public string desarrollador { get; set; }
+        public int fiscalia { get; set; }
+        public string descripcion { get; set; }
     }
 }
