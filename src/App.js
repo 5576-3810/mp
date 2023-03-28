@@ -15,7 +15,7 @@ const [modalEliminar, setModalEliminar]=useState(false);
 const [gestorseleccionado, setGestorSeleccionado]=useState({
 id: '',
 nombre: '',
-fiscalia: '',
+numero: '',
 descripcion: ''
 
 })
@@ -30,6 +30,7 @@ const handleChange=e=>{
     ...gestorseleccionado,
     [name]:value
   });
+  console.log(gestorseleccionado);
 }
 
 
@@ -59,8 +60,9 @@ await axios.get(baseUrl)
 }
 
 const peticionPost=async()=>{
-  delete gestorseleccionado.id;
-  gestorseleccionado.fiscalia=parseInt(gestorseleccionado.fiscalia)
+  //delete gestorseleccionado.id;
+  gestorseleccionado.id=parseInt(gestorseleccionado.id);
+  gestorseleccionado.numero=parseInt(gestorseleccionado.numero);
   await axios.post(baseUrl, gestorseleccionado)
   .then(Response=>{
     setData(data.concat(Response.data));
@@ -72,7 +74,7 @@ const peticionPost=async()=>{
 
 
   const peticionPut=async()=>{
-    gestorseleccionado.fiscalia=parseInt(gestorseleccionado.fiscalia)
+    gestorseleccionado.numero=parseInt(gestorseleccionado.numero)
     await axios.put(baseUrl+"/"+gestorseleccionado.id, gestorseleccionado)
     .then(Response=>{
       var respuesta=Response.data;
@@ -80,7 +82,7 @@ const peticionPost=async()=>{
       dataAuxiliar.map(gestor=>{
           if (gestor.id===gestorseleccionado.id){
           gestor.nombre=respuesta.nombre;
-          gestor.fiscalia=respuesta.fiscalia;
+          gestor.numero=respuesta.numero;
           gestor.descripcion=respuesta.descripcion;
           }
       })
@@ -120,7 +122,7 @@ peticionGet();
     <div className="App">
 
     <br/><br/><br/>
-    <h2><center>Consulta de fiscalías</center></h2>
+    <h2><center>Consulta de fiscalías del MP</center></h2>
     <br/>
     <button onClick={()=>abrirCerrarModalInsertar()} className="btn btn-success">Igresar nueva fiscalía</button>
     <br/>
@@ -140,7 +142,7 @@ peticionGet();
         <tr key={gestor.id}>
           <td>{gestor.id}</td>
           <td>{gestor.nombre}</td>
-          <td>{gestor.fiscalia}</td>
+          <td>{gestor.numero}</td>
           <td>{gestor.descripcion}</td>
 
           <td>
@@ -158,13 +160,16 @@ peticionGet();
                 </ModalHeader>
                 <ModalBody>
                 <div className="form-group">
+                <label>No numero:</label>
+                <br/>
+                <input type="text" className="form-control" name="id" onChange={handleChange}/>  
                 <label>Nombre:</label>
                 <br/>
                 <input type="text" className="form-control" name="nombre" onChange={handleChange}/>
-                <label>fiscalía:</label>
+                <label>Número:</label>
                 <br/>
-                <input type="text" className="form-control" name="fiscalia" onChange={handleChange}/>
-                <label>detalle:</label>
+                <input type="text" className="form-control" name="numero" onChange={handleChange}/>
+                <label>Detalle:</label>
                 <br/>
                 <input type="text" className="form-control" name="descripcion" onChange={handleChange}/>
                 </div>
@@ -185,14 +190,14 @@ peticionGet();
                 <div className="form-group">
                 <label>ID:</label>
                 <br/>
-                <input type="text" className="form-control" name="nombre" readOnly value={gestorseleccionado && gestorseleccionado.id}/>  
+                <input type="text" className="form-control" name="id" value={gestorseleccionado && gestorseleccionado.id}/>  
                 <br/>
                 <label>Nombre:</label>
                 <br/>
                 <input type="text" className="form-control" name="nombre" onChange={handleChange} value={gestorseleccionado && gestorseleccionado.nombre}/>
                 <label>fiscalía:</label>
                 <br/>
-                <input type="text" className="form-control" name="fiscalia" onChange={handleChange} value={gestorseleccionado && gestorseleccionado.fiscalia}/>
+                <input type="text" className="form-control" name="numero" onChange={handleChange} value={gestorseleccionado && gestorseleccionado.numero}/>
                 <label>detalle:</label>
                 <br/>
                 <input type="text" className="form-control" name="descripcion" onChange={handleChange} value={gestorseleccionado && gestorseleccionado.descripcion}/>
